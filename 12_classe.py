@@ -9,7 +9,6 @@
 from math import pi
 from msilib.schema import Property
 
-
 class FormaGeometrica:
 
     # Uma classe pode ter, dentro de si, tanto dados quanto
@@ -20,10 +19,8 @@ class FormaGeometrica:
     # Quando estão dentro de uma classe, as funções passam a
     # ser chamadas MÉTODOS, e *sempre* têm self como primeiro
     # parâmetro, representando o próprio objeto.
-
+    
     def __init__(self, base, altura, tipo):
-
-        # validação dos dados recebidos
 
         # Recebemos os parâmetros no construtor e
         # armazenamos dentro do objeto que está sendo
@@ -32,24 +29,24 @@ class FormaGeometrica:
         self.altura = altura
         self.tipo = tipo
 
-    # Metodos setter /ajustam o valor de atributos --privados/
+    # # Métodos setter (ajustam o valor de atributos __privados)
 
-    # def set_base(self,valor):
-    #     if type(valor) not in [int, float] or valor <=0:
+    # def set_base(self, valor):
+    #     if type(valor) not in [int, float] or valor <= 0:
     #         raise Exception("* A base deve ser numérica e maior que zero.")
-    #     self.__base =valor
+    #     self.__base = valor
 
-    # def set_altura(self,valor):
-    #     if type(valor) not in [int, float] or valor <=0:
+    # def set_altura(self, valor):
+    #     if type(valor) not in [int, float] or valor <= 0:
     #         raise Exception("* A altura deve ser numérica e maior que zero.")
-    #     self.__altura =valor
+    #     self.__altura = valor
 
-    # def set_tipo(self,valor):
-    #     if valor not in ["R","T","E"]:
-    #         raise Exception("* O tipo deve ser 'R', 'T', ou 'E'.")
-    #     self.__tipo =valor
+    # def set_tipo(self, valor):
+    #     if valor not in ["R", "T", "E"]:
+    #         raise Exception("* O tipo deve ser 'R', 'T' ou 'E'.")
+    #     self.__tipo = valor
 
-    # # Metodos getter (retornam o valor de atributos __privados)
+    # # Métodos getter (retornam o valor de atributos __privados)
 
     # def get_base(self):
     #     return self.__base
@@ -62,14 +59,14 @@ class FormaGeometrica:
 
     # Propriedades
 
-    @property  # Annotation
+    @property   # Annotation
     def base(self):             # getter disfarçado
         return self.__base
 
     @base.setter
-    def base(self, valor):
+    def base(self, valor):     # setter disfarçado
         if type(valor) not in [int, float] or valor <= 0:
-            raise Exception("* A base deve ser numérica e maior que zero.")
+           raise Exception("* A base deve ser numérica e maior que zero.")
         self.__base = valor
 
     @property
@@ -79,50 +76,47 @@ class FormaGeometrica:
     @altura.setter
     def altura(self, valor):
         if type(valor) not in [int, float] or valor <= 0:
-            raise Exception("* A base deve ser numérica e maior que zero.")
-        self.__altura = valor
+            raise Exception("* A altura deve ser numérica e maior que zero.")
+        self.__altura = valor   
 
     @property
     def tipo(self):
-        return self.__altura
+        return self.__tipo
 
-    @tipo.setter
+    @tipo.setter 
     def tipo(self, valor):
         if valor not in ["R", "T", "E"]:
-            raise Exception("* O tipo deve ser 'R', 'T', ou 'E'.")
+            raise Exception("* O tipo deve ser 'R', 'T' ou 'E'.")
         self.__tipo = valor
 
-######################################################
+    ##########################################################
 
-# Metodos para calculo da area da forma geometrica
-# def calc_area(self):
+    # Método para cálculo da área da forma geométrica
+    # def calc_area(self):
 
+    # Redefinindo como propriedade somente-leitura (só tem getter)
     @property
     def area(self):
         from math import pi
-        if (self.tipo == "R"):  # retangulo
+        if(self.tipo == 'R'):       # Retângulo
             return self.base * self.altura
-        elif (self.tipo == "T"):  # triangulo
+        elif(self.tipo == 'T'):     # Triângulo
             return self.base * self.altura / 2
-        else:  # elipse
-            return(self.base / 2) * (self.altura / 2) * pi
+        else:                       # Elipse
+            return (self.base / 2) * (self.altura / 2) * pi
 
+######################################################################
 
-######################################################
 # Criando objetos a partir da classe
-forma1 = FormaGeometrica(12, 7, "R")    # Isso chama __init__
+forma1 = FormaGeometrica(12, 7, "R")    # Isso chama __init__()
 forma2 = FormaGeometrica(7.5, 8.2, "T")
 
-#forma1.set_base = ("farinha")
-#forma2.altura ="dois palmos"
-
-print(f"forma1: base {forma1.base}, altura {forma1.altura}, tipo {forma1.tipo}, area {forma1.area}")
-print(f"forma2: base {forma2.base}, altura {forma2.altura}, tipo {forma2.tipo}, area {forma2.area}")
-
+# forma1.set_base("farinha")
 
 # print(f"forma1: base {forma1.get_base()}, altura {forma1.get_altura()}, tipo {forma1.get_tipo()}")
 # print(f"forma2: base {forma2.get_base()}, altura {forma2.get_altura()}, tipo {forma2.get_tipo()}")
 
+# forma2.altura = "dois palmos"
 
-# O --init-- é um metodo especial, chamado CONSTRUTOR, que é chamado sempre que criamos um novo objeto a partir da classe.
-# Se a classe necessitar de dados iniciais, quem os recebe é o construtor ,que os armazena em atributos dentro da classe.
+print(f"forma1: base {forma1.base}, altura {forma1.altura}, tipo {forma1.tipo}, área {forma1.area}")
+print(f"forma2: base {forma2.base}, altura {forma2.altura}, tipo {forma2.tipo}, , área {forma2.area}")
